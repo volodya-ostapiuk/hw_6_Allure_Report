@@ -4,6 +4,7 @@ import com.epam.pages.gmail.GmailHomePage;
 import com.epam.pages.gmail.GmailLoginPage;
 import com.epam.pages.gmail.GmailPasswordPage;
 import com.epam.utils.providers.DriverProvider;
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +20,7 @@ public class GmailLogInBO {
         homePage = new GmailHomePage();
     }
 
-    @Step("Authorising user step with email: {0}, password: {1}, for method: {method} step...")
+    @Step("Authorise user with email: {0}, password: {1}, in {method} step")
     public void logIn(String userEmail, String userPassword) {
         logger.info("Authorising user with email: " + userEmail);
         loginPage.enterEmail(userEmail);
@@ -27,9 +28,10 @@ public class GmailLogInBO {
         passwordPage.enterPassword(userPassword);
     }
 
-    public String getPageTitle() {
-        logger.info("Getting page title that has Google logo");
+    @Step("Verify user with email: {0} is logged in successfully, in {method} step")
+    public boolean verifyLogIn(String userEmail) {
+        logger.info("Verifying user login by getting page title of home page with Google logo");
         homePage.waitOnMailLogoToBeClickable();
-        return DriverProvider.getInstance().getTitle().toLowerCase();
+        return DriverProvider.getInstance().getTitle().toLowerCase().contains(userEmail.toLowerCase());
     }
 }

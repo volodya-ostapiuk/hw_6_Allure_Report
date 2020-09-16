@@ -34,7 +34,8 @@ public class GmailTest implements Constants {
     private void verifyDraftFieldsAreSavedCorrectly(String userEmail, String userPassword) {
         GmailLogInBO logInBO = new GmailLogInBO();
         logInBO.logIn(userEmail, userPassword);
-        Assert.assertTrue(logInBO.getPageTitle().contains(userEmail.toLowerCase()), WRONG_LOGIN);
+        boolean isUserLoggedIn = logInBO.verifyLogIn(userEmail);
+        Assert.assertTrue(isUserLoggedIn, WRONG_LOGIN);
 
         GmailMessageBO messageBO = new GmailMessageBO();
         messageBO.createDraftMessage(TEST_MESSAGE);

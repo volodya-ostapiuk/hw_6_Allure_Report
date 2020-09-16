@@ -1,5 +1,3 @@
-# hw_6_Allure_Report
-
 ## Run project
 Pull project to your computer and 
     ```
