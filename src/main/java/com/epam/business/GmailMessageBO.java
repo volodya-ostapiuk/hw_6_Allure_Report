@@ -17,8 +17,8 @@ public class GmailMessageBO {
         messageFormPage = new GmailMessageFormPage();
     }
 
-    @Step("Create draft message with fields - receiver: {message.receiver}, cc: {message.cc}, bcc: {message.bcc}, " +
-            "topic: {message.topic}, text: {message.letterText}, in {method} step")
+    @Step("Create draft message with fields - receiver: {0.receiver}, cc: {0.cc}, bcc: {0.bcc}, " +
+            "topic: {0.topic}, text: {0.letterText}, in {method} step")
     public void createDraftMessage(MessageEntity message) {
         logger.info("Creating new message.");
         homePage.clickComposeButton();
