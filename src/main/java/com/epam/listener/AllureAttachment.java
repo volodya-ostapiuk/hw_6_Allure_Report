@@ -12,6 +12,7 @@ import org.testng.ITestResult;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,12 +21,12 @@ public class AllureAttachment {
 
     public static void provideAttachment(ITestResult result) {
         try {
-            String failureScreenshotName = getScreenshotName(result);
+            String failureScreenshotName = getScreenshotName();
             File screenshotFolder = new File(String.format(Constants.SCREENSHOT_PATH, failureScreenshotName));
-            FileUtils.copyFile(takeScreenshotPNG(), screenshotFolder);
+            FileUtils.copyFile(new File(new String(takeScreenshotPNG(), StandardCharsets.UTF_8)), screenshotFolder);
             saveTextLog(result.getMethod().getConstructorOrMethod().getName() + " failed and screenshot is taken.");
         } catch (IOException exception) {
-            logger.error("Failed with saving screenshot: " + exception.getMessage());
+            logger.error("Failed with saving screenshot.");
         }
     }
 
@@ -35,17 +36,16 @@ public class AllureAttachment {
         return formatter.format(date);
     }
 
-    private static String getScreenshotName(ITestResult result) {
-        return result.getThrowable().getClass().getSimpleName() + getCurrentDate()
-                + "_Thread" + Thread.currentThread().getId();
+    private static String getScreenshotName() {
+        return "screenshot" + getCurrentDate() + "_Thread" + Thread.currentThread().getId() + ".png";
     }
 
     /**
      * Screenshot attachments for Allure
      */
     @Attachment(value = "Page screenshot", type = "image/png")
-    public static File takeScreenshotPNG() {
-        return ((TakesScreenshot) DriverProvider.getInstance()).getScreenshotAs(OutputType.FILE);
+    public static byte[] takeScreenshotPNG() {
+        return ((TakesScreenshot) DriverProvider.getInstance()).getScreenshotAs(OutputType.BYTES);
     }
 
     /**
