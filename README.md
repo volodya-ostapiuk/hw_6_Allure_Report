@@ -7,7 +7,7 @@ Pull project to your computer and
  
  Run 
     ```
-    mvn allure:report
+    mvn allure:serve
     ```
   to generate report.
 
