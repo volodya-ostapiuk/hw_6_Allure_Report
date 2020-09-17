@@ -28,8 +28,4 @@ public class ConfigProperties {
     public static String getDataSource() {
         return getProperty("data_source");
     }
-
-    public static String getScreenshotPath() {
-        return getProperty("screenshot_path");
-    }
 }
