@@ -12,7 +12,9 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         logger.error("Test failed: " + result.getThrowable().getMessage());
-        AllureAttachment.provideAttachment(result);
+        AllureAttachment.takeScreenshotPNG();
+        AllureAttachment.saveTextLog(result.getMethod().getConstructorOrMethod().getName()
+                + " test failed and screenshot is taken.");
     }
 
     private static String getTestMethodName(ITestResult result) {
