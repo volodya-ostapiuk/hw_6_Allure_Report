@@ -1,9 +1,15 @@
 ## Run project
 Pull project to your computer and 
     ```
-    run mvn
+    mvn test
     ```
- test to execute test report
+ test to build project
+ 
+ Run 
+    ```
+    mvn allure:report
+    ```
+  to generate report.
 
 ## Task
 Common:
