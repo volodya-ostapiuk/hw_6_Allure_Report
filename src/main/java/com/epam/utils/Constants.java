@@ -15,6 +15,7 @@ public interface Constants {
     String BASE_URL = ConfigProperties.getBaseUrl();
     int TIME_WAIT = ConfigProperties.getTimeWait();
     int EXPLICIT_WAIT = ConfigProperties.getExplicitWait();
+    String SCREENSHOT_PATH = ConfigProperties.getScreenshotPath();
 
     List<UserEntity> USERS = Objects.requireNonNull(JsonParser.getGmailJsonEntity()).getUsers();
 
