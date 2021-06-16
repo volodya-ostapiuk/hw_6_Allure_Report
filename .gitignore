@@ -2,6 +2,7 @@
 *.class
 /target
 .idea/
+#Allure
 .allure/
 
 # Log file
