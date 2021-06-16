@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 public abstract class BaseElement {
     protected WebElement webElement;
 
-    public BaseElement(WebElement webElement) {
+    protected BaseElement(WebElement webElement) {
         this.webElement = webElement;
     }
 

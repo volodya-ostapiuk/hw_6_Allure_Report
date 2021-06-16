@@ -31,7 +31,7 @@ public class DriverProvider implements Constants {
     public static void quit() {
         if (Objects.nonNull(driverPool.get())) {
             driverPool.get().quit();
-            driverPool.set(null);
+            driverPool.remove();
         }
     }
 }

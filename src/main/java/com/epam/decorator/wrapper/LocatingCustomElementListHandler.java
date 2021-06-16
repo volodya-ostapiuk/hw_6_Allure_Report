@@ -1,7 +1,6 @@
 package com.epam.decorator.wrapper;
 
 import com.epam.decorator.BaseElement;
-import com.epam.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 

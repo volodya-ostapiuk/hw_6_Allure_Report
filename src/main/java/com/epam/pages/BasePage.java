@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public abstract class BasePage {
     protected WebDriver webDriver;
 
-    public BasePage() {
+    protected BasePage() {
         webDriver = DriverProvider.getInstance();
         PageFactory.initElements(new CustomFieldDecorator(webDriver), this);
     }
