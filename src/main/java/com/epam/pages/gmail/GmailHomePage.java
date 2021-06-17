@@ -6,30 +6,38 @@ import com.epam.pages.BasePage;
 import com.epam.utils.Wait;
 import com.epam.utils.providers.DriverWaitProvider;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class GmailHomePage extends BasePage {
-    @FindBy(xpath = "//*[@class=\"T-I T-I-KE L3\"]")
+    @FindBy(css = ".make_message a")
     private Button composeButton;
 
-    @FindBy(xpath = "//*[@class='TK']/div[5]//a[@class='J-Ke n0']")
+    @FindBy(css = ".list_underlined li:nth-child(3) a")
     private Link draftsFolder;
 
-    @FindBy(xpath = "//*[@class=\"T-I T-I-KE L3\"]")
+    @FindBy(className = "ho_logo")
     private Link mailLogo;
 
-    @FindBy(css = ".ae4.UI[gh='tl'] tr:nth-child(1)")
+    @FindBy(xpath = "//*[@class='row new'][1]//span[@class='frm']")
     private Link lastDraftMessage;
 
-    @FindBy(css = ".ag.a8k")
-    private Link sentMessageLink;
+    @FindBy(css = ".block_confirmation .content.clear")
+    private WebElement sentMessageBlock;
+
+    @FindBy(className = "sn_menu_title")
+    private WebElement menuTitle;
+
+    public WebElement getMenuTitle() {
+        return menuTitle;
+    }
 
     public void waitOnMailLogoToBeClickable() {
         Wait.waitOnElementToBeClickable(mailLogo.getElement());
     }
 
-    public void waitOnSentMessageLinkToBeClickable() {
-        Wait.waitOnElementToBeClickable(sentMessageLink.getElement());
+    public void waitOnSentMessageLinkToBeVisible() {
+        Wait.waitOnElementToBeVisible(sentMessageBlock);
     }
 
     public void clickComposeButton() {
@@ -47,7 +55,11 @@ public class GmailHomePage extends BasePage {
         lastDraftMessage.click();
     }
 
-    public boolean isSentMessageLinkDisplayed() {
-        return sentMessageLink.isDisplayed();
+    public boolean isSentMessageDisplayed() {
+        return sentMessageBlock.isDisplayed();
+    }
+
+    public String getSentMessageText() {
+        return sentMessageBlock.getText();
     }
 }

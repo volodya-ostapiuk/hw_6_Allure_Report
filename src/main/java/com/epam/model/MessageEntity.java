@@ -11,11 +11,10 @@ public class MessageEntity {
 
     private String letterText;
 
-    public MessageEntity(String topic, String receiver, String cc, String bcc, String letterText) {
+    public MessageEntity(String topic, String receiver, String cc, String letterText) {
         this.topic = topic;
         this.receiver = receiver;
         this.cc = cc;
-        this.bcc = bcc;
         this.letterText = letterText;
     }
 
@@ -65,7 +64,6 @@ public class MessageEntity {
                 "topic='" + topic + '\'' +
                 ", receiver='" + receiver + '\'' +
                 ", cc='" + cc + '\'' +
-                ", bcc='" + bcc + '\'' +
                 ", letterText='" + letterText + '\'' +
                 '}';
     }

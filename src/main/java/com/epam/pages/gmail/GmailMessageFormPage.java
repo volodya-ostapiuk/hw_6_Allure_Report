@@ -4,51 +4,35 @@ import com.epam.decorator.elements.Button;
 import com.epam.decorator.elements.Link;
 import com.epam.decorator.elements.TextField;
 import com.epam.pages.BasePage;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class GmailMessageFormPage extends BasePage {
-    @FindBy(name = "to")
+    @FindBy(id = "to")
     private TextField toField;
 
-    @FindBy(xpath = "//*[@class='aB gQ pE']")
+    @FindBy(id = "cc_sw")
     private Link ccAdditionLink;
 
-    @FindBy(name = "cc")
+    @FindBy(css = "#cc_block #cc")
     private TextField ccField;
 
-    @FindBy(css = ".aB.gQ.pB")
+    @FindBy(id = "bcc_sw")
     private Link bccAdditionLink;
 
-    @FindBy(name = "bcc")
+    @FindBy(css = "#bcc_block #bcc")
     private TextField bccField;
 
-    @FindBy(name = "subjectbox")
+    @FindBy(name = "subject")
     private TextField topicFiled;
 
-    @FindBy(xpath = "//*[@class=\"Am Al editable LW-avf tS-tW\"]")
+    @FindBy(id = "text")
     private TextField letterTextFiled;
 
-    @FindBy(css = ".T-I.J-J5-Ji.aoO.v7.T-I-atl.L3")
+    @FindBy(css = ".send_container input[name='send']")
     private Button sendButton;
 
-    @FindBy(css = "img.Ha")
+    @FindBy(css = ".send_container input[name='save_in_drafts']")
     private Button saveAsDraftAndCloseButton;
-
-    @FindBy(xpath = "//*[@class=\"vN bfK a3q\"]")
-    private TextField filledToField;
-
-    @FindBy(xpath = "//*[@class=\"vN bfK a3p\"]")
-    private TextField filledCcField;
-
-    @FindBy(xpath = "//*[@class=\"vN bfK\"]")
-    private TextField filledBccField;
-
-    @FindBy(className = "aYF")
-    private TextField filledTopicField;
-
-    @FindBy(css = ".nH.Hd")
-    private WebElement messageDialog;
 
     public void enterReceiverEmail(String email) {
         toField.sendKeys(email);
@@ -78,20 +62,16 @@ public class GmailMessageFormPage extends BasePage {
         letterTextFiled.sendKeys(text);
     }
 
-    public String getEmailAttributeOfFilledToField() {
-        return filledToField.getAttribute("email");
+    public String getEmailTextOfFilledToField() {
+        return toField.getText();
     }
 
-    public String getEmailAttributeOfFilledCcField() {
-        return filledCcField.getAttribute("email");
+    public String getEmailTextOfFilledCcField() {
+        return ccField.getText();
     }
 
-    public String getEmailAttributeOfFilledBccField() {
-        return filledBccField.getAttribute("email");
-    }
-
-    public String getFilledTopicFieldText() {
-        return filledTopicField.getText();
+    public String getFilledTopicFieldAttribute() {
+        return topicFiled.getAttribute("value");
     }
 
     public String getFilledLetterTextFieldText() {

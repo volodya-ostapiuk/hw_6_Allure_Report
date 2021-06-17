@@ -3,6 +3,7 @@ package com.epam.business;
 import com.epam.model.MessageEntity;
 import com.epam.pages.gmail.GmailHomePage;
 import com.epam.pages.gmail.GmailMessageFormPage;
+import com.epam.utils.Constants;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -50,13 +51,12 @@ public class GmailMessageBO {
     @Step("Get filled fields from draft message in {method} step")
     public MessageEntity getDraftMessageEntity() {
         logger.log(Level.INFO, () -> "Getting filled fields from draft message.");
-        String filledToField = messageFormPage.getEmailAttributeOfFilledToField();
-        String filledCcField = messageFormPage.getEmailAttributeOfFilledCcField();
-        String filledBccField = messageFormPage.getEmailAttributeOfFilledBccField();
-        String filledTopicField = messageFormPage.getFilledTopicFieldText();
+        String filledToField = messageFormPage.getEmailTextOfFilledToField();
+        String filledCcField = messageFormPage.getEmailTextOfFilledCcField();
+        String filledTopicField = messageFormPage.getFilledTopicFieldAttribute();
         String filledTextField = messageFormPage.getFilledLetterTextFieldText();
         logger.log(Level.INFO, () -> "Creating new entity from filled draft message fields.");
-        return new MessageEntity(filledTopicField, filledToField, filledCcField, filledBccField, filledTextField);
+        return new MessageEntity(filledTopicField, filledToField, filledCcField, filledTextField);
     }
 
     @Step("Send last draft message in {method} step")
@@ -64,12 +64,12 @@ public class GmailMessageBO {
         logger.log(Level.INFO, () -> "Sending draft message.");
         messageFormPage.sendLetter();
         logger.log(Level.INFO, () -> "Waiting on draft message sent link to be clickable.");
-        homePage.waitOnSentMessageLinkToBeClickable();
+        homePage.waitOnSentMessageLinkToBeVisible();
     }
 
     @Step("Verify is draft message sent in {method} step")
     public boolean isDraftSent() {
         logger.log(Level.INFO, () -> "Checking is draft message sent by appearance of sent link.");
-        return homePage.isSentMessageLinkDisplayed();
+        return homePage.isSentMessageDisplayed() && homePage.getSentMessageText().equals(Constants.SUCCESSFUL_MESSAGE_SENT);
     }
 }
