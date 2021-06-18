@@ -4,7 +4,10 @@ import com.epam.decorator.elements.Button;
 import com.epam.decorator.elements.Link;
 import com.epam.decorator.elements.TextField;
 import com.epam.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.Optional;
 
 public class GmailMessageFormPage extends BasePage {
     @FindBy(id = "to")
@@ -71,7 +74,8 @@ public class GmailMessageFormPage extends BasePage {
     }
 
     public String getFilledTopicFieldAttribute() {
-        return topicFiled.getAttribute("value");
+        return Optional.ofNullable(topicFiled.getAttribute("value"))
+                .orElse(webDriver.findElement(By.cssSelector(".subj input[type=text]")).getAttribute("value"));
     }
 
     public String getFilledLetterTextFieldText() {

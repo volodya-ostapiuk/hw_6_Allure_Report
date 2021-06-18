@@ -30,4 +30,5 @@ public interface Constants {
     String WRONG_DRAFT_SENT = "Draft message isn't sent successfully.";
 
     String SUCCESSFUL_MESSAGE_SENT = "Лист успішно відправлено адресатам";
+    String DRAFTS_FOLDER_NAME = "Чернетки";
 }

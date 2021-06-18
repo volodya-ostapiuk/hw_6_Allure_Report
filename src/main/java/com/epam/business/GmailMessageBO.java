@@ -43,7 +43,7 @@ public class GmailMessageBO {
     @Step("Go to drafts folder and click on last draft message in {method} step")
     public void goToDraftsFolderAndClickLastDraftMessage() {
         logger.log(Level.INFO, () -> "Going to draft messages folder.");
-        homePage.clickDraftsFolder();
+        homePage.clickFolderByName(Constants.DRAFTS_FOLDER_NAME);
         logger.log(Level.INFO, () -> "Clicking on last saved draft message.");
         homePage.clickLastDraftMessage();
     }
@@ -70,6 +70,6 @@ public class GmailMessageBO {
     @Step("Verify is draft message sent in {method} step")
     public boolean isDraftSent() {
         logger.log(Level.INFO, () -> "Checking is draft message sent by appearance of sent link.");
-        return homePage.isSentMessageDisplayed() && homePage.getSentMessageText().equals(Constants.SUCCESSFUL_MESSAGE_SENT);
+        return homePage.isSentMessageDisplayed() && homePage.getSentMessageBlockText().equals(Constants.SUCCESSFUL_MESSAGE_SENT);
     }
 }

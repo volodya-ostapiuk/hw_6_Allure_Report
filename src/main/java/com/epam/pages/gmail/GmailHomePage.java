@@ -9,12 +9,18 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+import java.util.Optional;
+
 public class GmailHomePage extends BasePage {
     @FindBy(css = ".make_message a")
     private Button composeButton;
 
     @FindBy(css = ".list_underlined li:nth-child(3) a")
     private Link draftsFolder;
+
+    @FindBy(css = ".list_underlined li a")
+    private List<Link> allFolders;
 
     @FindBy(className = "ho_logo")
     private Link mailLogo;
@@ -59,7 +65,19 @@ public class GmailHomePage extends BasePage {
         return sentMessageBlock.isDisplayed();
     }
 
-    public String getSentMessageText() {
+    public String getSentMessageBlockText() {
         return sentMessageBlock.getText();
+    }
+
+    private Optional<Link> getFolderByName(String folderName) {
+        return allFolders
+                .stream()
+                .filter(element -> element.getText().trim().contains(folderName))
+                .findFirst();
+    }
+
+    public void clickFolderByName(String folderName) {
+        Optional<Link> linkElement = getFolderByName(folderName);
+        linkElement.ifPresent(Link::click);
     }
 }

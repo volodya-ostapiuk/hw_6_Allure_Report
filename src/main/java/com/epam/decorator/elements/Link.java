@@ -24,4 +24,9 @@ public class Link extends BaseElement {
         logger.log(Level.INFO, () -> "Checking is link element displayed");
         return webElement.isDisplayed();
     }
+
+    public String getText() {
+        logger.log(Level.INFO, () -> "Getting text from link with location: " + webElement.getLocation());
+        return webElement.getText();
+    }
 }
