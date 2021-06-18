@@ -2,7 +2,6 @@ package com.epam.verification;
 
 import com.epam.business.GmailLogInBO;
 import com.epam.business.GmailMessageBO;
-import com.epam.model.MessageEntity;
 import com.epam.utils.Constants;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -15,15 +14,15 @@ public class DraftFieldsVerification implements Constants {
 
     public void verifyDraftFieldsAreSavedCorrectly(String userEmail, String userPassword) {
         logger.log(Level.INFO, () -> "Verify login.");
-        GmailLogInBO logInBO = new GmailLogInBO();
+        var logInBO = new GmailLogInBO();
         logInBO.logIn(userEmail, userPassword);
         Assert.assertTrue(logInBO.verifyLogIn(userEmail), WRONG_LOGIN);
         logger.log(Level.INFO, () -> "Create draft message.");
-        GmailMessageBO messageBO = new GmailMessageBO();
+        var messageBO = new GmailMessageBO();
         messageBO.createDraftMessage(TEST_MESSAGE);
         messageBO.goToDraftsFolderAndClickLastDraftMessage();
         logger.log(Level.INFO, () -> "Verify saved draft message fields.");
-        MessageEntity filledDraftMessage = messageBO.getDraftMessageEntity();
+        var filledDraftMessage = messageBO.getDraftMessageEntity();
         Assert.assertEquals(filledDraftMessage.toString(), TEST_MESSAGE.toString(), WRONG_SAVED_DRAFT);
         logger.log(Level.INFO, () -> "Verify draft message sending.");
         messageBO.sendLastDraftMessage();

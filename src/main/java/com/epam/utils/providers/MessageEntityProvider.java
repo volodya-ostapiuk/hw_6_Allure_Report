@@ -11,7 +11,7 @@ public class MessageEntityProvider {
     private static final int MINIMUM = 0;
 
     public static MessageEntity getMessageEntity() {
-        message = Objects.requireNonNull(JsonParser.getGmailJsonEntity()).getMessage();
+        message = Objects.requireNonNull(JsonParser.getGmailJsonEntity()).message();
         message.setLetterText(message.getLetterText() +
                 new Random().nextInt(Integer.MAX_VALUE - MINIMUM) + MINIMUM);
         return message;

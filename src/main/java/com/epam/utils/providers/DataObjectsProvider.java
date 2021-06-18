@@ -7,7 +7,7 @@ public class DataObjectsProvider implements Constants {
         int usersAmount = USERS.size();
         Object[][] users = new Object[usersAmount][];
         for (int i = 0; i < usersAmount; i++) {
-            users[i] = new Object[]{USERS.get(i).getEmail(), USERS.get(i).getPassword()};
+            users[i] = new Object[]{USERS.get(i).email(), USERS.get(i).password()};
         }
         return users;
     }

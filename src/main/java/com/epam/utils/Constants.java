@@ -16,7 +16,7 @@ public interface Constants {
     int TIME_WAIT = ConfigProperties.getTimeWait();
     int EXPLICIT_WAIT = ConfigProperties.getExplicitWait();
 
-    List<UserEntity> USERS = Objects.requireNonNull(JsonParser.getGmailJsonEntity()).getUsers();
+    List<UserEntity> USERS = Objects.requireNonNull(JsonParser.getGmailJsonEntity()).users();
 
     MessageEntity TEST_MESSAGE = MessageEntityProvider.getMessageEntity();
     String TEST_RECEIVER_EMAIL = TEST_MESSAGE.getReceiver();
@@ -31,4 +31,6 @@ public interface Constants {
 
     String SUCCESSFUL_MESSAGE_SENT = "Лист успішно відправлено адресатам";
     String DRAFTS_FOLDER_NAME = "Чернетки";
+    String INBOX_FOLDER_NAME = "Вхідні";
+    String SEND_FOLDER_NAME = "Відправлені";
 }

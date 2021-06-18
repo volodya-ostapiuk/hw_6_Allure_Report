@@ -3,8 +3,11 @@ package com.epam.pages.gmail;
 import com.epam.decorator.elements.Button;
 import com.epam.decorator.elements.Link;
 import com.epam.pages.BasePage;
+import com.epam.utils.Constants;
+import com.epam.utils.PrintProvider;
 import com.epam.utils.Wait;
 import com.epam.utils.providers.DriverWaitProvider;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -77,7 +80,22 @@ public class GmailHomePage extends BasePage {
     }
 
     public void clickFolderByName(String folderName) {
-        Optional<Link> linkElement = getFolderByName(folderName);
-        linkElement.ifPresent(Link::click);
+        webDriver.findElement(By.cssSelector(".list_underlined li:nth-child(" + getFolderIndex(folderName) + ") a"))
+                .click();
+    }
+
+    private int getFolderIndex(String folderName) {
+        return switch (folderName) {
+            case Constants.INBOX_FOLDER_NAME -> 1;
+            case Constants.SEND_FOLDER_NAME -> 2;
+            case Constants.DRAFTS_FOLDER_NAME -> {
+                PrintProvider.log("Index of Drafts folder is 3");
+                yield 3;
+            }
+            default -> {
+                PrintProvider.log("Neither Foo nor Bar, hmmm...");
+                yield 0;
+            }
+        };
     }
 }
